@@ -116,6 +116,11 @@ class SetAssociativeCache:
         # If all are full, we replace the first way - FIFO
         self._indexLists[decimalIndex][0].setTag(tag) 
         self._indexLists[decimalIndex][0].setValid(1)
+        l2 = []
+        for i in self._indexLists[decimalIndex][1:]:
+            l2.append(i)
+        l2.append(self._indexLists[decimalIndex][0])
+        self._indexLists[decimalIndex] = l2
         self._numMiss += 1 
 
 
@@ -139,6 +144,7 @@ if __name__ == "__main__":
             # Updating the cache
             sa.updateCache(x)
 
+
     # Printing the descriptors
     print('Total number of accessed = ',sa.getTotalAccesses())
     print('Number of hits = ',sa.getNumHits())
@@ -148,6 +154,7 @@ if __name__ == "__main__":
     print('Hit/Miss rate = ',sa.getHitvsMissRate())
     print('')
     print('')
+ 
 
     
          
